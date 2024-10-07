@@ -5,6 +5,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
