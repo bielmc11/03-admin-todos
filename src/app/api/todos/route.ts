@@ -40,7 +40,6 @@ export async function POST(req: Request) {
   try {
     const {complete, description} = await postSchema.validate(await req.json());
 
-
     const todo = await prisma.todo.create({ data: {complete, description} });
     
     return NextResponse.json(todo);
