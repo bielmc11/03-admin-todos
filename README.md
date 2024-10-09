@@ -9,7 +9,15 @@ docker-compose up -d
 
 2. Renombrar el archivo .env.template a .env
 3. Remplazar las variables de entorno en el archivo .env
-4. Ejecutar el seed [para crear la BD](localhost:3000/api/seed) (locahost:3000/api/seed)
+4. Ejecutar ```npm insatll```
+5. Ejecutar ```npm run dev```
+6. Ejecutar los siguientes comandos de primsa:
+```
+    npx prisma migrate dev
+    npx primsa generate
+```
+7. Ejecutar el seed [para crear la BD](localhost:3000/api/seed) (locahost:3000/api/seed)
+
 
 # Prisma comands
 

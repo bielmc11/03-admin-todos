@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import { Todo } from "@prisma/client";
 import { Segment } from "next/dist/server/app-render/types";
 import { NextResponse, NextRequest } from "next/server";
 import * as yup from "yup";
