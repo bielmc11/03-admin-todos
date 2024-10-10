@@ -1,7 +1,14 @@
-import React from 'react'
+import { WidgetItem } from "@/components";
+import React from "react";
 
- export default function DashboardPage() {
+export default function DashboardPage() {
   return (
-    <div className='text-3xl'>Dashboard Page</div>
-  )
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <WidgetItem />
+      <WidgetItem />
+      <WidgetItem />
+      <WidgetItem />
+      <WidgetItem />
+    </div>
+  );
 }
