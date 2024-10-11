@@ -1,13 +1,39 @@
 import React from "react";
+import styles from "./todoItem.module.css";
+import { IoCheckboxOutline, IoSquareOutline } from "react-icons/io5";
 
-interface Props  {
-  id: string
-  description: string
-  complete: boolean
-  createdAt: Date
-  updatedAt: Date
-};
+interface Props {
+  id: string;
+  description: string;
+  complete: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
-export const TodoItem = ({ id, description, complete, createdAt, updatedAt }: Props) => {
-  return <div>TodoItem {description}</div>;
+export const TodoItem = ({
+  id,
+  description,
+  complete,
+  createdAt,
+  updatedAt,
+}: Props) => {
+  return (
+    <div className={complete ? styles.todoDone : styles.todoPending}>
+      <div className="flex flex-col sm:flex-row justify-start items-center gap-4">
+        <div
+          className={`flex p-2 rounded-md cursor-pointer hover:bg-opacity-60 ${
+            complete ? "bg-blue-100" : ""
+          }`}
+        >
+          {complete ? (
+            <IoCheckboxOutline size={30} />
+          ) : (
+            <IoSquareOutline size={30} />
+          )}
+        </div>
+
+        <div className="text-center sm:text-left">{description}</div>
+      </div>
+    </div>
+  );
 };
