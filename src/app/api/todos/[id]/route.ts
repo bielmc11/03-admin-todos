@@ -1,10 +1,14 @@
 import prisma from "@/lib/prisma";
+import { Todo } from "@prisma/client";
 import { Segment } from "next/dist/server/app-render/types";
 import { NextResponse, NextRequest } from "next/server";
 import * as yup from "yup";
 
+const getTodo = async (id: string): Promise<Todo | null> => {
+  const todo = await prisma.todo.findFirst({ where: { id } });
 
-
+  return todo;
+};
 
 export async function GET(request: NextRequest, segment: Segment) {
   const { params } = segment;
@@ -14,7 +18,6 @@ export async function GET(request: NextRequest, segment: Segment) {
     where: { id: params.id },
   });
 
-  console.log(request.nextUrl.searchParams);
   if (!myTodo) {
     return NextResponse.json({
       message: "No existe el todo",
@@ -26,13 +29,21 @@ export async function GET(request: NextRequest, segment: Segment) {
 }
 
 const putSchema = yup.object({
-  description: yup.string().required(),
+  description: yup.string().optional(),
   complete: yup.boolean().optional(),
 });
 
 export async function PUT(req: NextRequest, segment: Segment) {
   try {
     const params = segment.params.id;
+    const todo = await getTodo(params);
+
+    if (!todo) {
+      return NextResponse.json(
+        { message: `No existe todo con id ${params}` },
+        { status: 404 }
+      );
+    }
 
     const { description, complete } = await putSchema.validate(
       await req.json()
@@ -43,10 +54,10 @@ export async function PUT(req: NextRequest, segment: Segment) {
         id: params,
       },
       data: {
-        description: description,
+        description,
+        complete,
       },
     });
-
     return NextResponse.json({
       message: todoPosted,
       status: 200,
