@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
+import { todo } from "node:test";
 import * as yup from "yup";
 
 export async function GET(request: NextRequest) {
@@ -38,14 +39,27 @@ const postSchema = yup.object({
 
 export async function POST(req: Request) {
   try {
-    const {complete, description} = await postSchema.validate(await req.json());
+    const { complete, description } = await postSchema.validate(
+      await req.json()
+    );
 
-    const todo = await prisma.todo.create({ data: {complete, description} });
-    
+    const todo = await prisma.todo.create({ data: { complete, description } });
+
     return NextResponse.json(todo);
-  } catch (error ) {
+  } catch (error) {
     //console.log(error);
     return NextResponse.json(error, { status: 400 });
   }
+}
 
+export async function DELETE(req: Request) {
+  try {
+    const todos = await prisma.todo.deleteMany({
+      where: { complete: true },
+    });
+    return NextResponse.json({ message: todos }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(error, { status: 400 });
+  }
 }

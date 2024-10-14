@@ -57,3 +57,18 @@ export const createTodo = async (
   return data;
 };
 
+
+export const deleteCompletedTodos = async(): Promise<string> => {
+  try{
+    const result = await fetch('http://localhost:3000/api/todos',{
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    return 'eliminacion compeltada'
+  } catch (error) {
+    console.log(error)
+    return 'ha ocurrido un error'
+  }
+}

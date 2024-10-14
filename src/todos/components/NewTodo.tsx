@@ -3,23 +3,30 @@
 import { FormEvent, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
 import * as api from "../helpers/todos";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const NewTodo = () => {
   const [description, setdescription] = useState("");
-const router = useRouter()
+  const router = useRouter();
+
   const onSumbmit = async (e: FormEvent) => {
     e.preventDefault();
     if (description.trim().length === 0) {
-      console.log("description is empty");
-      return
+      return;
     }
     const todoCreated = await api.createTodo(description);
     setdescription("");
-    router.refresh()
+    router.refresh();
   };
+
+  const deletedTodos = async () => {
+    await api.deleteCompletedTodos();
+    router.refresh();
+  }
+
   return (
     <form className="flex w-full" onSubmit={onSumbmit}>
+      {/* todo hacer un debouncer */}
       <input
         onChange={(e) => {
           setdescription(e.target.value);
@@ -41,11 +48,12 @@ const router = useRouter()
 
       <button
         //TODO: onClick={ () => deleteCompleted() }
+        onClick={() => deletedTodos()}
         type="button"
         className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all"
       >
         <IoTrashOutline />
-        Delete
+        Borrar completados
       </button>
     </form>
   );
