@@ -11,7 +11,7 @@ interface Props {
   createdAt: Date;
   updatedAt: Date;
 
-  toggleTodo: (id: string, complete: boolean) => Promise<Todo[] | void>;
+  toggleTodo: (id: string, complete: boolean) => Promise<Todo | void>;
 }
 
 

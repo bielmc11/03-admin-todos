@@ -2,6 +2,7 @@
 
 import { Todo } from "@prisma/client";
 
+//Cambiar el complete
 export const changeTodosStatus = async (
   id: string,
   complete: boolean
@@ -16,14 +17,13 @@ export const changeTodosStatus = async (
     },
   });
   const data = await result.json();
-
-  console.log(data);
   return data;
 };
 
 type MiType = {
   mesage: Todo[];
 };
+//Obtener todos los todos
 export const selectAllTodos = async (): Promise<MiType | void> => {
   try {
     const result = await fetch(`http://localhost:3000/api/todos`, {
@@ -38,7 +38,7 @@ export const selectAllTodos = async (): Promise<MiType | void> => {
   }
 };
 
-
+//Crear nuevo todo
 export const createTodo = async (
   description: string,
 ): Promise<Todo> => {
@@ -58,6 +58,7 @@ export const createTodo = async (
 };
 
 
+//Eliminar los todos completados
 export const deleteCompletedTodos = async(): Promise<string> => {
   try{
     const result = await fetch('http://localhost:3000/api/todos',{
