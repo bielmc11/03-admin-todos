@@ -1,3 +1,7 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+
 import prisma from "@/lib/prisma";
 import { NewTodo, TodosGrid } from "@/todos";
 import { Metadata } from "next";
@@ -12,6 +16,8 @@ export default async function ServerAcionsPage() {
   const awaitTodos = await prisma.todo.findMany({
     orderBy: { description: "asc" },
   });
+
+  console.log('construido000000000000000000')
   return (
     <>
     <span className="text-3xl mb-10">SERVER ACIONS</span>
