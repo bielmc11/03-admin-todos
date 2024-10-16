@@ -3,7 +3,7 @@ import React from "react";
 import { CiBookmarkCheck, CiLogout } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
 import Link from "next/link";
-import {  IoCalendarOutline, IoListOutline } from "react-icons/io5";
+import {  IoCalendarOutline, IoCodeWorkingOutline, IoListOutline } from "react-icons/io5";
 
 const menu = [
   {
@@ -20,6 +20,11 @@ const menu = [
     path: "/dashboard/server-actions",
     icon: <IoListOutline size={30} />,
     title: "Server Actions",
+  },
+  { //El tiene aqui rest-todos 
+    path: "/dashboard/cookies",
+    icon: <IoCodeWorkingOutline size={30} />,
+    title: "Cookies",
   },
   
 ];
