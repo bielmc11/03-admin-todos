@@ -8,8 +8,12 @@ import {
   IoCalendarOutline,
   IoCodeWorkingOutline,
   IoListOutline,
+  IoPerson,
+  IoPersonOutline,
 } from "react-icons/io5";
 import { auth } from "@/auth";
+import { SessionProvider, signOut } from "next-auth/react";
+import { LogOutButton } from "./LogOutButton";
 
 const menu = [
   {
@@ -30,16 +34,19 @@ const menu = [
     title: "Server Actions",
   },
   {
-    //El tiene aqui rest-todos
     path: "/dashboard/cookies",
     icon: <IoCodeWorkingOutline size={30} />,
     title: "Cookies",
   },
   {
-    //El tiene aqui rest-todos
     path: "/dashboard/products",
     icon: <IoBaseballOutline size={30} />,
     title: "Products",
+  },
+  {
+    path: "/dashboard/profile",
+    icon: <IoPersonOutline size={30} />,
+    title: "Profile",
   },
 ];
 
@@ -49,7 +56,8 @@ export const Sidebar = async () => {
     ? session?.user?.image
     : "https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp";
 
-  const userName = session?.user?.name ?? 'Name unknown';
+  const userName = session?.user?.name ?? "Name unknown";
+
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
@@ -87,10 +95,9 @@ export const Sidebar = async () => {
       </div>
 
       <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-        <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-          <CiLogout />
-          <span className="group-hover:text-gray-700">Logout</span>
-        </button>
+        <SessionProvider>
+          <LogOutButton />
+        </SessionProvider>
       </div>
     </aside>
   );
