@@ -18,6 +18,9 @@ docker-compose up -d
 ```
 7. Ejecutar el seed [para crear la BD](localhost:3000/api/seed) (locahost:3000/api/seed)
 
+## Nota: Usuario por defecto
+__usuario__: usuraio@gmail.com
+__password__: 123456
 
 # Prisma comands
 

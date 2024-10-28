@@ -1,4 +1,4 @@
-//Instrucciones para llegar como si fuese postmamn
+//ESTO ES COMO SI LO HICIESE SIN ACTIONS ES DECIR LLAMANDO A MI PARTE DE API (ahora no lo estoy usando)
 
 import { Todo } from "@prisma/client";
 
