@@ -53,8 +53,9 @@ export const addTodo = async (description: string) => {
 
 export const deleteCompleted = async () => {
   try {
-    const deleteTodo = await prisma.todo.deleteMany({
-      where: { complete: true },
+    const session = await auth()
+    await prisma.todo.deleteMany({
+      where: { complete: true, userId: session?.user.id ?? '' },
     });
     revalidatePath("/dashboard/server-actions");
   } catch (error) {

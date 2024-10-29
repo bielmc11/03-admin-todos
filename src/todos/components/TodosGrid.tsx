@@ -11,8 +11,8 @@ interface Props {
 }
 
 export const TodosGrid = ({ todos = [] }: Props) => {
-  const [misTodos, setMisTodos] = useState<Todo[]>(todos);
-  const router = useRouter();
+  //const [misTodos, setMisTodos] = useState<Todo[]>(todos);
+  //const router = useRouter();
 
   // const toggleTodo = async (
   //   id: string,
